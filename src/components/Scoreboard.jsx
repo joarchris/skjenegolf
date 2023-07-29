@@ -65,15 +65,10 @@ const Scoreboard = () => {
         <div>
           <h2>Scoreboard</h2>
           <table>
-            <thead>
-              <tr>
-                <span>Player Total Throws</span>
-              </tr>
-            </thead>
             <tbody>
               {players.map((player) => (
                 <tr key={player.id}>
-                  <td>{player.name}</td>
+                  <td style={{ paddingRight: '10px' }}>{player.name}:</td>
                   <td>{calculateTotalScore(player.throws)}</td>
                 </tr>
               ))}
