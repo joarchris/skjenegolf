@@ -32,41 +32,42 @@ const Scoreboard = () => {
     <div>
       <h2>{trackName || 'Scoreboard'}</h2>
 
-      <table>
-        <thead>
-          <tr>
-            <th>Hole</th>
-            {players.map((player) => (
-              <th key={player.id}>{player.name}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {Array.from({ length: 18 }, (_, hole) => (
-            <tr key={hole}>
-              <td>{hole + 1}</td>
-              {players.map((player, index) => (
-                <td key={player.id}>
-                  <input
-                    type="number"
-                    value={player.throws[hole]}
-                    onChange={(e) => handleThrowChange(index, hole, parseInt(e.target.value))}
-                  />
-                </td>
-              ))}
+      <div style={{ overflowX: 'auto' }}>
+        <table>
+          <thead>
+            <tr>
+              <th>
+                {players.map((player) => (
+                  <th key={player.id}>{player.name}</th>
+                ))}
+              </th>
             </tr>
-          ))}
-        </tbody>
-      </table>
-
+          </thead>
+          <tbody>
+            {Array.from({ length: 18 }, (_, hole) => (
+              <tr key={hole}>
+                <td>{hole + 1}</td>
+                {players.map((player, index) => (
+                  <td key={player.id}>
+                    <input
+                      type="number"
+                      value={player.throws[hole]}
+                      onChange={(e) => handleThrowChange(index, hole, parseInt(e.target.value))}
+                    />
+                  </td>
+                ))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {players.length > 0 && (
         <div>
           <h2>Scoreboard</h2>
           <table>
             <thead>
               <tr>
-                <th>Player</th>
-                <th>Total Throws</th>
+                <span>Player Total Throws</span>
               </tr>
             </thead>
             <tbody>

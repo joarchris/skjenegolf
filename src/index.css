@@ -378,3 +378,31 @@ h2 {
   color: var(--rating);
   margin-bottom: 10px;
 }
+
+/* Add this CSS in a separate style file or in the component */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+}
+
+thead {
+  background-color: #f2f2f2;
+  position: sticky;
+  top: 0;
+}
+
+th {
+  padding: 8px;
+  text-align: center;
+}
+
+td input {
+  width: 50px;
+}
+
+tbody {
+  display: block;
+  max-height: 300px; /* Set a max height for the tbody to enable scrolling */
+  overflow-y: scroll;
+}
