@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 const Scoreboard = () => {
   const [trackName, setTrackName] = useState('');
   const [players, setPlayers] = useState([]);
+  const [numHoles, setNumHoles] = useState(''); // Default to 18 holes
 
   useEffect(() => {
     const savedTrackName = localStorage.getItem('trackName') || '';
@@ -10,6 +11,9 @@ const Scoreboard = () => {
 
     const savedPlayers = JSON.parse(localStorage.getItem('players')) || [];
     setPlayers(savedPlayers);
+
+    const savedNumHoles = parseInt(localStorage.getItem('numHoles')) || '';
+    setNumHoles(savedNumHoles);
   }, []);
 
   const handleThrowChange = (playerIndex, hole, value) => {
@@ -37,6 +41,7 @@ const Scoreboard = () => {
       trackName: trackName,
       savedDate: formattedDate,
       players: players,
+      numHoles: numHoles,
     };
 
     // Get the existing archive from local storage or create an empty array
@@ -77,7 +82,7 @@ const Scoreboard = () => {
             </tr>
           </thead>
           <tbody>
-            {Array.from({ length: 18 }, (_, hole) => (
+            {Array.from({ length: numHoles }, (_, hole) => (
               <tr key={hole}>
                 <td>{hole + 1}</td>
                 {players.map((player, index) => (

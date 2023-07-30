@@ -5,8 +5,7 @@ const Player = () => {
   const [trackName, setTrackName] = useState('');
   const [players, setPlayers] = useState([]);
   const [playerName, setPlayerName] = useState('');
-
-  const totalHoles = 18; // Assuming you have 18 holes
+  const [numHoles, setNumHoles] = useState(''); // Default to 18 holes
 
   useEffect(() => {
     const savedTrackName = localStorage.getItem('trackName') || '';
@@ -14,7 +13,14 @@ const Player = () => {
 
     const savedPlayers = JSON.parse(localStorage.getItem('players')) || [];
     setPlayers(savedPlayers);
+
+    const savedNumHoles = parseInt(localStorage.getItem('numHoles')) || '18';
+    setNumHoles(savedNumHoles);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem('numHoles', numHoles.toString());
+  }, [numHoles]);
 
   const handleTrackNameChange = (event) => {
     setTrackName(event.target.value);
@@ -25,7 +31,7 @@ const Player = () => {
   };
 
   const handleAddPlayer = () => {
-    setPlayers((prevPlayers) => [...prevPlayers, { id: Date.now(), name: playerName, throws: Array(totalHoles).fill(0) }]);
+    setPlayers((prevPlayers) => [...prevPlayers, { id: Date.now(), name: playerName, throws: Array(numHoles).fill(0) }]);
     setPlayerName('');
   };
 
@@ -33,22 +39,14 @@ const Player = () => {
     setPlayers((prevPlayers) => prevPlayers.filter((player) => player.id !== playerId));
   };
 
-  const handleUpdateThrows = (playerIndex, hole, throws) => {
-    setPlayers((prevPlayers) =>
-      prevPlayers.map((player, index) =>
-        index === playerIndex
-          ? {
-              ...player,
-              throws: player.throws.map((t, i) => (i === hole ? throws : t)),
-            }
-          : player
-      )
-    );
-  };
-
   const handleSaveScoreboard = () => {
     localStorage.setItem('trackName', trackName);
     localStorage.setItem('players', JSON.stringify(players));
+  };
+
+  const handleNumHolesChange = (event) => {
+    const value = parseInt(event.target.value);
+    setNumHoles(value);
   };
 
   return (
@@ -56,6 +54,9 @@ const Player = () => {
       <h2>Add Players and Track Name</h2>
       <div>
         <input type="text" value={trackName} onChange={handleTrackNameChange} placeholder="Disc Golf Track Name" />
+      </div>
+      <div>
+        <input type="number" value={numHoles} onChange={handleNumHolesChange} placeholder="Add number of holes" />
       </div>
       <div>
         <input type="text" value={playerName} onChange={handlePlayerNameChange} placeholder="Player name" />
