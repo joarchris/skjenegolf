@@ -22,6 +22,9 @@ const Navbar = () => {
           <Link to="/add-players">
             <button>Setup Scoreboard</button>
           </Link>
+          <Link to="/archive">
+            <button>Archive</button>
+          </Link>
         </div>
 
         <div className="burger-menu" onClick={toggleMenu}>
@@ -34,6 +37,9 @@ const Navbar = () => {
             </Link>
             <Link to="/add-players" onClick={toggleMenu}>
               Setup Scoreboard
+            </Link>
+            <Link to="/archive" onClick={toggleMenu}>
+              Archive
             </Link>
           </div>
         </div>

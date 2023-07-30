@@ -28,6 +28,29 @@ const Scoreboard = () => {
   // Function to calculate the total score for a player
   const calculateTotalScore = (throws) => throws.reduce((acc, curr) => acc + curr, 0);
 
+  const handleSaveToLocalStorage = () => {
+    const currentDate = new Date();
+    const formattedDate = currentDate.toLocaleString();
+
+    // Create a new scoreboard object to save in the archive
+    const newScoreboard = {
+      trackName: trackName,
+      savedDate: formattedDate,
+      players: players,
+    };
+
+    // Get the existing archive from local storage or create an empty array
+    const existingArchive = JSON.parse(localStorage.getItem('scoreboardArchive')) || [];
+
+    // Add the new scoreboard object to the archive
+    existingArchive.push(newScoreboard);
+
+    // Save the updated archive back to local storage
+    localStorage.setItem('scoreboardArchive', JSON.stringify(existingArchive));
+
+    alert('Scoreboard data saved to local storage!');
+  };
+
   return (
     <div>
       <h2>{trackName || 'Scoreboard'}</h2>
@@ -76,7 +99,7 @@ const Scoreboard = () => {
           </table>
         </div>
       )}
-
+      <button onClick={handleSaveToLocalStorage}>Save Scoreboard</button>
       {players.length === 0 && <p>No players added yet.</p>}
     </div>
   );
