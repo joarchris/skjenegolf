@@ -53,13 +53,16 @@ const Scoreboard = () => {
 
   const handleSave = () => {
     // Display an alert before deleting the scoreboard
-    if (window.confirm('YO YO! Save this scoreboard only if it is finished, okay?')) {
+    if (window.confirm('YO YO! Save this scoreboard only if it is finished? Press OK to save')) {
       handleSaveToLocalStorage();
     }
   };
 
   return (
     <div>
+      <p className="infocontainer">
+        Stay on this page while entering all the throws, and save scoreboard at the end when you are done with the game.
+      </p>
       <h2>{trackName || 'Scoreboard'}</h2>
 
       <div style={{ overflowX: 'auto' }}>

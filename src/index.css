@@ -291,7 +291,7 @@ footer {
 .menu-items {
   display: none;
   position: absolute;
-  top: 25%;
+  top: 35%;
   right: 0;
   background-color: #ffffff;
   padding: 1rem;
@@ -407,4 +407,13 @@ tbody {
   display: block;
   max-height: 300px; /* Set a max height for the tbody to enable scrolling */
   overflow-y: scroll;
+}
+
+.infocontainer {
+  background-color: #ffffff;
+  font-family: 'Barlow';
+  color: #000;
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
 }

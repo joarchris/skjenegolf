@@ -63,11 +63,7 @@ const Player = () => {
       </div>
       <table>
         <thead>
-          <tr>
-            <th>
-              <h3>Players added:</h3>
-            </th>
-          </tr>
+          <h4>Players added:</h4>
         </thead>
         <tbody>
           {players.map((player, index) => (
