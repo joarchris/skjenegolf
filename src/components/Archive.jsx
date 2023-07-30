@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button } from 'react-bootstrap';
+import { TrashIcon } from '@heroicons/react/24/outline';
 
 const ArchivePage = () => {
   const [selectedScoreboard, setSelectedScoreboard] = useState(null);
@@ -31,19 +32,35 @@ const ArchivePage = () => {
     return playersWithRanking;
   };
 
+  // Function to delete a scoreboard from the archived list
+  const deleteScoreboard = (index) => {
+    const updatedScoreboards = [...archivedScoreboards];
+    updatedScoreboards.splice(index, 1);
+    localStorage.setItem('scoreboardArchive', JSON.stringify(updatedScoreboards));
+    setSelectedScoreboard(null); // Close the modal if it's open for the deleted scoreboard
+  };
+  const handleDelete = () => {
+    // Display an alert before deleting the scoreboard
+    if (window.confirm('YO YO! Are you sure you want to delete this scoreboard?')) {
+      deleteScoreboard();
+    }
+  };
   return (
-    <div>
+    <div className="archive">
       <h2>Archived Scoreboards</h2>
       {archivedScoreboards.length > 0 ? (
-        <ul>
+        <span>
           {archivedScoreboards.map((scoreboard, index) => (
             <div key={index}>
-              <button onClick={() => openModal(scoreboard)}>
+              <button style={{ marginRight: '10px' }} onClick={() => openModal(scoreboard)}>
                 {scoreboard.trackName} - {scoreboard.savedDate}
               </button>
+              <span onClick={() => handleDelete(index)}>
+                <TrashIcon height={15} />
+              </span>
             </div>
           ))}
-        </ul>
+        </span>
       ) : (
         <p>No archived scoreboards yet.</p>
       )}

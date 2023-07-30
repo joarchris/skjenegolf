@@ -48,7 +48,14 @@ const Scoreboard = () => {
     // Save the updated archive back to local storage
     localStorage.setItem('scoreboardArchive', JSON.stringify(existingArchive));
 
-    alert('Scoreboard data saved to local storage!');
+    alert('Scoreboard data saved to archive!');
+  };
+
+  const handleSave = () => {
+    // Display an alert before deleting the scoreboard
+    if (window.confirm('YO YO! Save this scoreboard only if it is finished, okay?')) {
+      handleSaveToLocalStorage();
+    }
   };
 
   return (
@@ -86,7 +93,7 @@ const Scoreboard = () => {
       </div>
       {players.length > 0 && (
         <div>
-          <h2>Scoreboard</h2>
+          <h2 style={{ marginTop: '20px' }}>Scoreboard</h2>
           <table>
             <tbody>
               {players.map((player) => (
@@ -99,7 +106,7 @@ const Scoreboard = () => {
           </table>
         </div>
       )}
-      <button onClick={handleSaveToLocalStorage}>Save Scoreboard</button>
+      <button onClick={handleSave}>Save Scoreboard</button>
       {players.length === 0 && <p>No players added yet.</p>}
     </div>
   );
